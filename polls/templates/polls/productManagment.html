@@ -1,0 +1,28 @@
+      {% load index %}
+
+{% for item in username.product_set.all %}
+<div class="ui card">
+  <div class="image">
+
+    <img src="{{ item.product_img.name|getImgUrl }}">
+  </div>
+  <div class="content">
+    <a class="header">{{ item.product_name }}</a>
+    <div class="meta">
+      <span class="date">Joined in 2013</span>
+    </div>
+    <div class="description">
+     {{ item.product_shortD }}
+    </div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      {{ item.product_price }} $
+        <a class="ui button" href="{% url 'polls:editProduct' item.id %}">editproduct</a>
+
+    </a>
+  </div>
+</div>
+
+ {% endfor%}

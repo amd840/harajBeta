@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>HomePage</title>
+
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/site.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/container.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/grid.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/image.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/menu.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/divider.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/segment.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/form.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/input.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/button.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/list.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/message.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/icon.css' %}">
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="{% static 'polls/semantic/dist/semantic.min.js' %}"></script>
+     <style type="text/css">
+    body {
+      background-color: #ffffff;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="ui fixed inverted cblue menu ">
+    <div class="ui container">
+      <a href="#" class="header item">
+    <img class="" src="{% static 'polls/logo3.png' %}">
+        KFUPM HARAJ
+      </a>
+      <a href="#" class="item">Home</a>
+
+      <div class="ui simple dropdown item">
+        Dropdown <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item" href="#">Link Item</a>
+          <a class="item" href="#">Link Item</a>
+          <div class="divider"></div>
+          <div class="header">Header Item</div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            Sub Menu
+            <div class="menu">
+              <a class="item" href="#">Link Item</a>
+              <a class="item" href="#">Link Item</a>
+            </div>
+          </div>
+          <a class="item" href="#">Link Item</a>
+        </div>
+      </div>
+        {% if theuser %}
+        <a href="{% url 'polls:panel' 'OrderTobeShipped' %}" class="item right">{{ theuser.username }}</a>
+                <a href="{% url 'polls:cart' %}" class="item right">Cart</a>
+
+        <a href="{% url 'polls:logout' %}" class="item right">logout</a>
+
+        {% else %}
+
+
+        <a href="{% url 'polls:login' %}" class="item right">Login</a>
+        <a href="{% url 'polls:signup' %}" class="item right">Signup</a>
+        {% endif %}
+
+
+    </div>
+  </div>
+
+
+
+
+
+<div class="ui clearing segment">
+</div>
+
+
+{% if theuser %}
+    <a class="ui button" href="{% url 'polls:addproduct'%}">add new product</a>
+    {% endif %}
+    <div class="ui stacked segment">
+
+        {% for aproduct in product.all %}
+        <div class="ui card">
+  <div class="image">
+      {% load index %}
+
+    <img src="{{ imgs|index:forloop.counter }}">
+  </div>
+  <div class="content">
+    <a class="header">{{ aproduct.product_name }}</a>
+    <div class="meta">
+      <span class="date">Joined in 2013</span>
+    </div>
+    <div class="description">
+     {{ aproduct.product_shortD }}
+    </div>
+  </div>
+  <div class="extra content">
+    <a href="{% url 'polls:product' aproduct.id %}">
+      <i class="user icon"></i>
+      {{ aproduct.product_price }} $
+        <a class="ui button" href="{% url 'polls:addToCart' aproduct.id %}">add to cart</a>
+
+    </a>
+  </div>
+</div>
+
+
+{% endfor %}
+
+    </div>
+
+
+
+</body>
+</html>

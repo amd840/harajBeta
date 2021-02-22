@@ -1,0 +1,93 @@
+
+ {% extends 'head.html' %}
+ {% block content %}
+
+      {% load index %}
+
+            {% for cart in carts %}
+            <div class="ui row" >
+
+
+            <div class="ui card">
+
+
+                <div class="image">
+                    <img src="{{ cart|getCartPro:'img' }}">
+
+                </div>
+                <div class="content">
+                    <a  class="header">{{ cart|getCartPro:'name' }}</a>
+                    <div class="meta">
+                        <span class="date">Joined in 2013</span>
+                    </div>
+                    <div class="description">
+                        {{ cart|getCartPro:'short' }}
+                    </div>
+                    <div class="description">
+                        <label id="qu">
+                        {{ cart|getCartPro:'qu' }}
+                        </label>
+                        <label id="theID" style ='visibility:hidden'>{{ cart|getCartPro:'id' }}</label>
+                        <button onclick="plus()" class="ui compact icon button">
+                            <i class="plus icon"></i>
+                        </button>
+                        <button onclick="minus()"  class="ui compact icon button">
+                            <i class="minus icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="price icon"></i>
+                        {{ cart.product.product_price }} $
+                        <a class="ui button" href="{% url 'polls:delCart' cart.id  %}">delete</a>
+                    </a>
+                </div>
+            </div>
+            </div>
+
+            <br>
+
+            {% endfor %}
+
+            {{carts.count}}
+      <a class="ui button cbgreen" href="{% url 'polls:makeOrder' %}">Order</a>
+
+
+
+
+
+<script>
+
+     var qu = parseInt($("#qu").text());
+
+     function plus() {
+        var theId = parseInt($("#theID").text());
+         $("#qu").text(qu+1)
+         qu+=1
+
+
+         var xhttp = new XMLHttpRequest();
+         xhttp.open("GET", `/addproduct/${theId}`, true);
+
+          xhttp.send();
+
+     }
+
+     function minus() {
+     var theId = parseInt($("#theID").text());
+
+         if(qu>0){
+                $("#qu").text(qu-1)
+                qu-=1
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", `/decproCount/${theId}`, false);
+                xhttp.send();
+
+                if(qu==0){location.reload();}
+         }else{
+            location.reload();
+         }
+     }
+ </script>
+{% endblock %}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add product</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/site.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/container.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/grid.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/image.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/menu.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/divider.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/segment.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/form.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/input.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/button.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/list.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/message.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/icon.css' %}">
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="{% static 'polls/semantic/dist/semantic.min.js' %}"></script>
+     <style type="text/css">
+    body {
+      background-color: #ffffff;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .column {
+      max-width: 450px;
+    }
+
+  </style>
+</head>
+<body>
+
+
+{% if product %}
+<form class="ui large form" action="{% url 'polls:saveEditP' product.id %}" method="post" enctype="multipart/form-data">
+{% else%}
+<form class="ui large form" action="{% url 'polls:addproduct' %}" method="post" enctype="multipart/form-data">
+
+{% endif%}
+
+        <div class="ui stacked segment">
+
+{% csrf_token %}
+
+            {% if product %}
+            {% load index %}
+            <div class="ui middle center aligned grid" >
+                <img src="{{ product.product_img.name|getImgUrl}}" class="img" style="height:300px;width:400px; margin:20px">
+                <a style="height:20px;padding:3px 10px" class="ui button white"><i class="upload icon"></i></a></img>
+
+
+            </div>
+            <div class="field">
+
+                <input type="text" name="product_name" placeholder="product_name" value="{{product.product_name}}">
+            </div>
+                <div class="field">
+            <input type="text" name="product_price" placeholder="product_price" value="{{product.product_price}}">
+                </div>
+            <div class="field">
+                <input type="text" name="product_qentity" placeholder="product_qentity" value="{{product.product_qentity}}">
+            </div>
+            <div class="field">
+                <input type="text" name="product_shortD" placeholder="product_shortD" value="{{product.product_shortD}}">
+            </div>
+            <div class="field">
+                <input style="height:100px" type="text" name="product_longD" placeholder="product_longD" value="{{product.product_longD}}">
+            </div>
+
+            <p>
+                <input id="id_image" type="file" class="" name="image">
+
+            </p>
+            <select name="sorts" id="sorts">
+                {% for sort in sorts %}
+                <optgroup label="{{ sort.sort}}">
+                    {% for subsort1 in sort.subsort_set.all %}
+                    <option value="{{ subsort1.id}}">{{ subsort1.subsort }}</option>
+                    {% endfor%}
+                </optgroup>
+                {% endfor%}
+            </select>
+            <div class="field">
+                <input class="ui button fluid cbgreen" type="submit" name="submit" value="Edit product">
+            </div>
+            <div class="field">
+                <a href="{% url 'polls:deleteProduct' product.id  %}" class="ui button fluid red">Delete</a>
+            </div>
+            {% else%}
+            <div class="field">
+
+                <input type="text" name="product_name" placeholder="product_name" value="{{product}}">
+            </div>
+                <div class="field">
+            <input type="text" name="product_price" placeholder="product_price">
+                </div>
+            <div class="field">
+                <input type="text" name="product_qentity" placeholder="product_qentity">
+            </div>
+            <div class="field">
+                <input type="text" name="product_shortD" placeholder="product_shortD">
+            </div>
+            <div class="field">
+                <input style="height:100px" type="text" name="product_longD" placeholder="product_longD">
+            </div>
+            <p>
+                <input id="id_image" type="file" class="" name="image">
+            </p>
+            <div class="field">
+                <select name="sort" id="sort">
+                {% for sort in sorts %}
+                <optgroup label="{{ sort.sort}}">
+                    {% for subsort1 in sort.subsort_set.all %}
+                    <option value="{{ subsort1.id}}">{{ subsort1.subsort }}</option>
+                    {% endfor%}
+                </optgroup>
+                {% endfor%}
+            </select>
+
+
+
+            </div>
+            <div class="field">
+                <input class="ui button fluid cbgreen" type="submit" name="submit" value="Add product">
+            </div>
+
+
+            {% endif%}
+
+
+
+        </div>
+</form>
+    </div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>signup</title>
+    {% load static %}
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/reset.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/site.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/container.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/grid.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/header.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/image.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/menu.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/divider.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/segment.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/form.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/input.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/button.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/list.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/message.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/icon.css' %}">
+    <style type="text/css">
+    body {
+      background-color: #BBD4CE;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="{% static 'polls/semantic/dist/semantic.min.js' %}"></script>
+</head>
+<body>
+
+
+    <div class="ui middle aligned center aligned grid" >
+        <div class="column" style="margin 200px">
+            <h2 class="ui cblue image header">
+                <img class="image" src="{% static 'polls/logo.svg' %}">
+                <div class="content ">
+                    Sign up
+                </div>
+
+            </h2>
+
+
+
+<form class="ui large form"  action="{% url 'polls:signup' %}" method="post">
+{% csrf_token %}
+
+    <div class="ui stacked segment">
+
+
+
+            <div class="field">
+                <input type="text" name="firstname" placeholder="First Name">
+            </div>
+            <div class="field">
+                <input type="text" name="lastname" placeholder="Last Name">
+            </div>
+            <div class="field">
+
+                <input type="text" name="username" placeholder="User Name">
+        </div>
+        <div class="field">
+            <input type="password" name="password" placeholder="Password">
+
+        </div>
+
+        <div class="field">
+                <input type="text" name="email" placeholder="Email">
+    </div>
+        <div class="field">
+                <input type="text" name="phone" placeholder="Mobile Phone">
+        </div>
+        <div class="field">
+                <input type="text" name="address" placeholder="Address: 816 - 224">
+        </div>
+
+
+
+        <div class="field">
+
+                <input class="ui button fluid submit cbgreen" type="submit" name="submit" value="Signup">
+
+        </div>
+        <div class="field">
+            <a class="ui button fluid cbgreen" href="{% url 'polls:login' %}">login</a>
+
+        </div>
+
+</div>
+
+</form>
+</div>
+        </div>
+</body>
+
+</body>
+</html>

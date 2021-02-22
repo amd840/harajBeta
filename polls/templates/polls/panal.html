@@ -1,0 +1,45 @@
+ {% extends 'head.html' %}
+
+ {% block content %}
+      {% load index %}
+  <div class="grid ui">
+
+      <div class="four wide column">
+
+          <div class="ui inverted vertical menu ">
+              <a href="{% url 'polls:panel' 'OrderTobeShipped' %}" class="active item">
+                  Order To be Shipped
+              </a>
+              <a href="{% url 'polls:panel' 'productmanagement' %}" class="item">
+                  Product Management
+              </a>
+              <a href="Messages" class="item">
+                  Friends
+              </a>
+          </div>
+      </div>
+      <div class="twelve wide column">
+
+          {% if page|panalPage %}
+            {% include 'ordermanagment.html' %}
+
+          {% else %}
+            {% include 'productManagment.html' %}
+          <script>{{ '0'|plus}}</script>
+
+          {% endif%}
+
+
+            </div>
+  </div>
+ {% include 'sellerOrder.html' %}
+ <script>
+    function add(){
+    {{ '0'|plus}}
+    }
+ </script>
+
+
+
+
+{% endblock %}

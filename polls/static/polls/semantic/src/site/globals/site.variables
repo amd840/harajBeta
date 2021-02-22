@@ -1,0 +1,11 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+
+@white            : #FFFFFF;
+@cpink            : #F9B4AB;
+@cyellow          : #FDEBD3;
+@cblue            : #264E70;
+@cbgree           : #679186;
+@clgree           : #BBD4CE;

@@ -1,0 +1,43 @@
+      {% load index %}
+
+{% for order in orders %}
+<div class="ui card">
+
+
+                <div class="image">
+                    <img src="{{ order|getorder:'img' }}">
+
+                </div>
+                <div class="content">
+                    <a class="header">{{ order|getCartPro:'name' }}</a>
+                    <div class="meta">
+                        <span class="date">Joined in 2013</span>
+                    </div>
+                    <div class="description">
+                        {{ order|getorder:'short' }}
+                    </div>
+
+                    <div class="description">
+                        {{ order|getorder:'buyer' }}
+                    </div>
+                    <div class="description">
+                        {{ order|getorder:'state' }}
+                    </div>
+                    <div class="description">
+                        {{ order|getorder:'phone' }}
+                    </div>
+                    <div class="description">
+                        {{ order|getorder:'address' }}
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="price icon"></i>
+                        {{ order|getorder:'price' }} $
+                        <a class="ui button" href="{% url 'polls:orderCompletion' order.id %}">Complete the order</a>
+                    </a>
+                </div>
+            </div>
+
+ {% endfor%}
