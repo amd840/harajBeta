@@ -1,0 +1,57 @@
+.green {
+    background: chartreuse;
+    color: chartreuse;
+}
+
+.cbgreen {
+    background: #679186;
+    color: #fff
+}
+
+.btn.cbgreen:hover {
+    background: #7fb6a7;
+    color: #fff
+}
+
+.cbgreen-text {
+    color: #679186
+}
+
+.btn.cblue:hover {
+    background: #356c9c;
+    color: #FFF;
+}
+
+.cblue {
+    background: #264E70;
+    color: #FFF;
+}
+
+.cblue-text {
+    color: #264E70;
+}
+
+.clblue {
+    background: #CCE2FF;
+}
+
+.cpink {
+    background: #F9B4AB
+}
+
+.cyellow {
+    background: #FDEBD3;
+}
+
+.clgreen {
+    background: #BBD4CE;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+a.list-group-item.active {
+    background-color: #264E70;
+    color: #FFF;
+}

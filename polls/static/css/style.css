@@ -1,8 +1,57 @@
-body{
-	background: red
+.card {
+    margin: 10px;
+    padding: 10px;
 
 }
+.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+.MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
+.MultiCarousel .MultiCarousel-inner .item { float: left;}
+.MultiCarousel .MultiCarousel-inner .item > div { text-align: center; padding:10px; margin:10px; background:#f1f1f1; color:#666;}
+.MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
+.MultiCarousel .leftLst { left:0; }
+.MultiCarousel .rightLst { right:0; }
 
-h1 {
-color:blue
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
+
+
+
+
+ div.card-body img{
+    height: 100px;
+
+ }
+div.carousel-item img {
+    height: 400px;
+    width: auto;
+
+
 }
+div.carousel {
+    margin: 10px 0px;
+
+
+}
+p {
+    margin: 0px;
+}
+.login {
+    width: 50%;
+    margin: 2% 25%;
+}
+div.login input {
+    width: 80%;
+    margin: 0 10%;
+}
+div.login label {
+    width: 80%;
+    margin: 0 10%;
+}
+
+@media (max-width: 576px) {
+    .login {
+        width: 96%;
+        margin: 2%;
+    }
+    
+}
+

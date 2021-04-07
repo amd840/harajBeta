@@ -1,43 +1,40 @@
-      {% load index %}
+{% load index %}
+<div class="container">
+    <div class="row">
 
-{% for order in orders %}
-<div class="ui card">
 
 
-                <div class="image">
-                    <img src="{{ order|getorder:'img' }}">
+        {% for order in orders %}
+        <div class="p-2 cusCal">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">{{ order|getCartPro:'name' }}</h5>
+                </div>
+                <div class="card-body">
+                    <img class="card-img-top" style="height:200px; width:auto" src="{{ order|getorder:'img' }}">
+
+                    <h6 class="">{{ order|getorder:'short' }}</h6>
+                    <h6 class="">{{ order|getorder:'buyer' }}</h6>
+                    <h6 class="">{{ order|getorder:'state' }}</h6>
+                    <i class="fas fa-envelope">  </i>
+                    <h6 class="card-text">{{ order|getorder:'phone' }}</span>
+                        <h6 class="card-text">{{ order|getorder:'address' }}</span>
+                            <p class="card-text"> <small class="text-muted"> <i  class="fas fa-phone-alt cblue-text">  </i> +966 543096731</small></p>
 
                 </div>
-                <div class="content">
-                    <a class="header">{{ order|getCartPro:'name' }}</a>
-                    <div class="meta">
-                        <span class="date">Joined in 2013</span>
-                    </div>
-                    <div class="description">
-                        {{ order|getorder:'short' }}
-                    </div>
-
-                    <div class="description">
-                        {{ order|getorder:'buyer' }}
-                    </div>
-                    <div class="description">
-                        {{ order|getorder:'state' }}
-                    </div>
-                    <div class="description">
-                        {{ order|getorder:'phone' }}
-                    </div>
-                    <div class="description">
-                        {{ order|getorder:'address' }}
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="price icon"></i>
-                        {{ order|getorder:'price' }} $
-                        <a class="ui button" href="{% url 'polls:orderCompletion' order.id %}">Complete the order</a>
+                <div class="card-footer">
+                    <a><i class="price icon"></i>
+                        {{ order|getorder:'price' }} $ 
                     </a>
+                    <div>
+                        <a class="btn cblue" href="{% url 'polls:orderCompletion' order.id %}">Complete the order</a>
+                    </div>
                 </div>
             </div>
 
- {% endfor%}
+        </div>
+
+        {% endfor%}
+    </div>
+</div>

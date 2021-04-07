@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %} {% load index %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HomePage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <style type="text/css">
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex toggled" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Panal</div>
+            <div class="list-group list-group-flush">
+
+                <a href="{% url 'polls:panel' 'OrderTobeShipped' %}" class="list-group-item list-group-item-action {% if page|panalPage %}active{% endif %}" id="list-OBJECTIVE-list" role="tab" aria-controls="OBJECTIVE">Order To be Shipped</a>
+                <a href="{% url 'polls:panel' 'productmanagement' %}" class="list-group-item list-group-item-action {% if page|panalPage %}{% else %}active{% endif %}" id="list-EDUCATIONS-list" role="tab" aria-controls="EDUCATIONS">Product Management</a>
+                <a href="Messages" class="list-group-item list-group-item-action" id="list-SHORT-COURSES-list" data-bs-toggle="list" href="#list-SHORT-COURSES" role="tab" aria-controls="SHORT-COURSES">Friends</a>
+            </div>
+        </div>
+
+
+        <!-- /#sidebar-wrapper -->
+
+        <div id="page-content-wrapper">
+
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+                <div class="container-fluid">
+                    <button class="btn btn-dark" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
+                    <a href="{% url 'polls:index'%}" class="navbar-brand"> <img style='height:45px' src="{% static 'polls/logo3.png' %}"> KFUPM HARAJ</a>
+                    <div class="row me-0 mb-0 mb-lg-0">
+                        <span class="col nav-item">
+                        <a href="{% url 'polls:cart' %}" class="nav-link btn-sm btn-outline-light"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg></a></span>
+                        <span class="col nav-item">
+                        <a href="{% url 'polls:addproduct'%}" class="nav-link btn-sm btn-outline-light"><svg id="Capa_1" fill="currentColor"  height="25" viewBox="0 0 512 512" width="25" xmlns="http://www.w3.org/2000/svg"><g><path d="m391.85 306.049h-30v55.101h-55.101v30h55.101v55.101h30v-55.101h55.1v-30h-55.1z"/><path d="m421.625 248.736v-248.736h-421.625v421.625h248.736c18.631 52.596 68.865 90.375 127.764 90.375 74.715 0 135.5-60.785 135.5-135.5 0-58.9-37.779-109.133-90.375-127.764zm-150.625-218.736h120.625v30.251h-120.625zm-90.375 0h60.375v102.458l-30.188-13.361-30.188 13.361v-102.458zm-150.625 0h120.625v30.251h-120.625zm211.849 361.625h-211.849v-301.374h120.625v88.293l60.188-26.639 60.187 26.639v-88.293h120.625v151.598c-4.967-.555-10.012-.849-15.125-.849-74.715 0-135.5 60.785-135.5 135.5 0 5.113.294 10.158.849 15.125zm134.651 90.375c-58.173 0-105.5-47.327-105.5-105.5s47.327-105.5 105.5-105.5 105.5 47.327 105.5 105.5-47.327 105.5-105.5 105.5z"/></g></svg></a>
+                    </span>
+                        <a href="{% url 'polls:logout' %}" class="col nav-link btn-sm btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg></a>
+                    </div>
+
+                </div>
+            </nav>
+            <div class="container-fluid " style="padding :10px">
+                <div class="" style="text-align:center;padding: 10px; margin :10px">
+                    <div class="tab-content" id="nav-tabContent">
+
+
+                        {% block content %} {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,28 +1,29 @@
-      {% load index %}
+{% load index %}
+<div class="container">
+    <div class="row">
 
-{% for item in username.product_set.all %}
-<div class="ui card">
-  <div class="image">
+        {% for item in username.product_set.all %}
+        <div class="p-2 cusCal">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ item.product_name }}</h5>
+                </div>
 
-    <img src="{{ item.product_img.name|getImgUrl }}">
-  </div>
-  <div class="content">
-    <a class="header">{{ item.product_name }}</a>
-    <div class="meta">
-      <span class="date">Joined in 2013</span>
-    </div>
-    <div class="description">
-     {{ item.product_shortD }}
-    </div>
-  </div>
-  <div class="extra content">
-    <a>
-      <i class="user icon"></i>
-      {{ item.product_price }} $
-        <a class="ui button" href="{% url 'polls:editProduct' item.id %}">editproduct</a>
 
-    </a>
-  </div>
+
+                <div class="card-body">
+                    <img class="card-img-top card-img-top" style="height:200px; width:auto" src="{{ item.product_img.name|getImgUrl }}">
+
+                    <h6 class="">{{ item.product_shortD }}</h6>
+                    <h6 class="inline-block"><i class="user icon"></i>{{ item.product_price }}$</h6>
+                    <a class="btn cblue" href="{% url 'polls:editProduct' item.id %}">editproduct</a>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor%}</div>
 </div>
-
- {% endfor%}

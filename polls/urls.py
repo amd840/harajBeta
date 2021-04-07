@@ -25,6 +25,9 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"),
     path('ss/', views.signups, name="signups"),
     path('login/', views.login, name="login"),
+    path('search/', views.search, name="search"),
+
+    
     path('addproduct/', views.addproduct, name="addproduct"),
     #path('upload_pic/', views.upload_pic, name="upload_pic"),
     path('panel/<str:orderid>/', views.panel, name="panel"),

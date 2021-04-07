@@ -4,14 +4,27 @@ from polls.models import Cart, User, Product, Order, Sort, SubSort
 register = template.Library()
 
 
+totalPrice = 0.0
+
+imgCounter = 0
 @register.filter
-def index(indexable, i):
-    if len(indexable) > i-1:
-        if indexable[i-1]:
-            return indexable[i-1]
+def index(indexable):
+    global imgCounter
+    imgCounter+=1
+    if len(indexable) > imgCounter-1:
+        return indexable[imgCounter-1]
     else:
         return "static/pic_folder/star.png"
 
+@register.filter
+def getTitle(lst):
+    return lst.first().sort.sort
+
+@register.filter
+def zeroImgIndx(zero):
+    global imgCounter
+    imgCounter = 0
+    return ''
 
 @register.filter
 def getImgUrl(url):
@@ -35,6 +48,8 @@ def getCartPro(cart,val):
     if(val=="name"):
         return product.product_name
     elif(val=="price"):
+        global totalPrice
+        totalPrice+=float(product.product_price) * cart.product_qentity
         return product.product_price
     elif (val == "qu"):
         return cart.product_qentity
@@ -96,7 +111,24 @@ def plus(plus):
     cart1.save()
 
 
+@register.filter
+def printTotal(nu):
+    return totalPrice
 
+@register.filter
+def emptyTotal(nu):
+    global totalPrice
+    totalPrice = 0.0
+    return ''
+
+@register.filter
+def cartCount(carts):
+    count = carts.count
+    try:
+        return int(count)  
+    except:
+        return len(carts)
+    return str(count)
 
 
 

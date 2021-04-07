@@ -1,0 +1,30 @@
+section {
+    width: 50%;
+    display: inline-block;
+    margin: 20px 5vw;
+}
+aside {
+    width: 35%;
+    display: inline-block;
+
+}
+
+
+@media (max-width: 576px) {
+    .login {
+        width: 96%;
+        margin: 2%;
+    }
+    section {
+        width: 90%;
+        display: block;
+        margin: 20px 10px;
+    }
+    aside {
+        width: 85%;
+        display: block;
+        margin: 20px 10px;
+
+    }
+
+}

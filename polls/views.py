@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.core import serializers
 import json
 from collections import namedtuple
+# from captcha.image import ImageCaptcha
+# from captcha.audio import AudioCaptcha
 
 # Create your views here.
 from django.http import HttpRequest, HttpResponseForbidden
@@ -16,18 +18,50 @@ from .models import Cart, User, Product, Order, Sort, SubSort
 from django.template import loader
 from django.contrib.sessions.backends.db import SessionStore as DBStore
 from django.contrib.sessions.base_session import AbstractBaseSession
+# import os
+# from pathlib import Path
 
 def index(request):
     products = Product.objects.order_by('id')
+    # captcha = ImageCaptcha()
+    # captcha = AudioCaptcha()
+    # path = os.path.join(os.path.dirname(__file__), 'static/out.wav')
+    # captcha.write('1234', path)
     imagelist = []
+    sortList=[]
+    sorts = Sort.objects.order_by('id')
+    for st in sorts:
+        proList = Product.objects.filter(sort=st)
+        sortList.append(proList)
+    # return HttpResponse(json.dumps(sortList))
+    
     for pro in products:
         imagelist.append(pro.product_img.name[5:])
     # return HttpResponse(imagelist)
     if (request.session.get('theuser')):
         euser = User.objects.get(username=request.session.get('theuser'))
-        return render(request, 'polls/index.html', {'product': products, 'theuser': euser, "imgs": imagelist})
+        return render(request, 'polls/index.html', {'list': sortList, 'theuser': euser, "imgs": imagelist,})
 
-    return render(request, 'polls/index.html', {'product': products, "imgs": imagelist})
+    return render(request, 'polls/index.html', {'list': sortList, "imgs": imagelist})
+
+    return HttpResponse("Home Page")
+
+
+def search(request):
+    # return HttpResponse(request.GET)
+    if(request.GET.get("search")):
+        products = Product.objects.filter(product_name__contains=request.GET.get("search"))
+    else:
+        return HttpResponseRedirect('/')  
+    imagelist = [] 
+    for pro in products:
+        imagelist.append(pro.product_img.name[5:])
+    # return HttpResponse(imagelist)
+    if (request.session.get('theuser')):
+        euser = User.objects.get(username=request.session.get('theuser'))
+        return render(request, 'polls/search.html', {'products': products, 'theuser': euser, "imgs": imagelist})
+
+    return render(request, 'polls/search.html', {'products': products, "imgs": imagelist})
 
     return HttpResponse("Home Page")
 
@@ -69,6 +103,7 @@ def login(request):
             request.session['theuser'] = user.username
             if((request.session.get('cart'))):
                 addCartToUser(request, user)
+                request.session['cart']=None
 
             # return render(request, 'polls/addproduct.html')
             return HttpResponseRedirect('/')
@@ -253,7 +288,29 @@ def addToCart(request, productid):
 
             request.session['cart'] = json.loads(dataw)
             # request.session['cart'] = serializers.serialize('json', data)
+        else:
+            cart = Cart(product=productid, buyer="", seller=seller.username, state=1, product_qentity=1)
 
+            data = []
+            cartcvalue = {'model': 'polls.cart', 'pk': len(data), 'fields': {'buyer': '', 'seller': cart.seller, 'state': cart.state, 'product': cart.product, 'product_qentity': cart.product_qentity}}
+
+            data.append(cartcvalue)
+
+            # data.append()
+            # str = type(data)
+            # return HttpResponse(data)
+            # return HttpResponse(str(data))
+
+            # carts.append(cart)
+            # del request.session['cart']
+            dataw = str(data)
+            dataw = dataw.replace("'",'"')
+            dataw = json.dumps(data)
+            # return HttpResponse((dataw))
+
+            # dataw = dataw.replace("'", '"')
+
+            request.session['cart'] = json.loads(dataw)
 
 
     else:
@@ -291,10 +348,12 @@ def logout(request):
 
 def cart(request):
     # products = user.cart_set.all()
+   
     if (request.session.get('theuser')):
         user = User.objects.get(username=request.session['theuser'])
         carts = Cart.objects.filter(buyer=user.username,state=1)
-        return render(request, 'polls/cart.html', {'carts': carts, 'user': user})
+        return render(request, 'polls/cart.html', {'carts': carts, 'user': user,'theuser':user})
+
     if (request.session.get('cart')):
 
         carts2 = (request.session.get('cart'))
@@ -306,9 +365,9 @@ def cart(request):
             cart = Cart(product=x["fields"]["product"], buyer="", seller=x["fields"]["seller"], state=x["fields"]["state"], product_qentity=x["fields"]["product_qentity"],pk=x["pk"])
             cartlist.append(cart)
 
+        # return HttpResponse(cartlist)
 
         return render(request, 'polls/cart.html', {'carts': cartlist})
-    # return HttpResponse(carts)
     return render(request, 'polls/cart.html')
 
 
@@ -338,13 +397,13 @@ def delCart(request, cartId):
         mycart = Cart.objects.get(pk=cartId)
         mycart.delete()
 
-        return cart(request)
+        return HttpResponseRedirect('/cart')
     else:
         carts = (request.session.get('cart'))
         # return HttpResponse(carts)
         carts.pop(cartId)
         request.session['cart'] = carts
-        return cart(request)
+        return HttpResponseRedirect('/cart')
 
 
 class ImageUploadForm(forms.Form):

@@ -1,93 +1,114 @@
+ {% extends 'head.html' %} {% block content %} {% load index %} {{ 0|emptyTotal }}
+<section id='items'>
+    <h2 style="display: inline">Shopping Cart </h2>
+    <h3 id='counter' style="display: inline"> {{carts|cartCount}}</h3>
+    {% for cart in carts %}
+    <span><div class="card text-secondary">
+        <div class="card-header">
+            <p class="header">{{ cart|getCartPro:'name' }}</p>
+        </div>
+        <div class="card-body">
+                <img src="{{ cart|getCartPro:'img' }}">
 
- {% extends 'head.html' %}
- {% block content %}
-
-      {% load index %}
-
-            {% for cart in carts %}
-            <div class="ui row" >
-
-
-            <div class="ui card">
-
-
-                <div class="image">
-                    <img src="{{ cart|getCartPro:'img' }}">
-
-                </div>
-                <div class="content">
-                    <a  class="header">{{ cart|getCartPro:'name' }}</a>
-                    <div class="meta">
-                        <span class="date">Joined in 2013</span>
-                    </div>
-                    <div class="description">
-                        {{ cart|getCartPro:'short' }}
-                    </div>
-                    <div class="description">
-                        <label id="qu">
-                        {{ cart|getCartPro:'qu' }}
-                        </label>
-                        <label id="theID" style ='visibility:hidden'>{{ cart|getCartPro:'id' }}</label>
-                        <button onclick="plus()" class="ui compact icon button">
-                            <i class="plus icon"></i>
-                        </button>
-                        <button onclick="minus()"  class="ui compact icon button">
-                            <i class="minus icon"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="price icon"></i>
-                        {{ cart.product.product_price }} $
-                        <a class="ui button" href="{% url 'polls:delCart' cart.id  %}">delete</a>
-                    </a>
-                </div>
+            <div style="margin-left:10px" class="d-inline-block">
+                
+                <p >
+                    {{ cart|getCartPro:'short' }}
+                </p>
+                <p id="price{{ cart|getCartPro:'id' }}">
+                    {{ cart|getCartPro:'price' }}
+                </p><label class="d-inline">$</label>                
+            
+                    <a class="text-danger" href="{% url 'polls:delCart' cart.id  %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-x-fill" viewBox="0 0 16 16">
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646L8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z"/>
+                      </svg></a>
+               
             </div>
-            </div>
+        </div>
+    <div class="card-footer">
+        
+        <label id="theID{{ cart|getCartPro:'id' }}" style='visibility:hidden'>{{ cart|getCartPro:'id' }}</label>
+        <button onclick="plus({{ cart|getCartPro:'id' }})" class="btn cblue-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+              </svg>
+                        </button>
+                        <label id="qu{{ cart|getCartPro:'id' }}">
+                            {{ cart|getCartPro:'qu' }}
+                            </label>
+        <button  onclick="minus({{ cart|getCartPro:'id' }})" class="btn cblue-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+              </svg>
+                        </button>
+    </div>
+    
+        
+    </div>
+    </span>
 
-            <br>
+    <br> {% endfor %}
 
-            {% endfor %}
 
-            {{carts.count}}
-      <a class="ui button cbgreen" href="{% url 'polls:makeOrder' %}">Order</a>
+
+
+</section>
+<aside>
+    <div class="card text-secondary">
+        <div class="card-body">
+            <p>Total:</p>
+            <a id='totatl'>{{ 5|printTotal }}</a>
+        </div>
+        <div class="card-footer">
+
+            <a href="{% url 'polls:makeOrder' %}" id="buy" class="cblue btn">buy</a>
+        </div>
+
+    </div>
+</aside>
 
 
 
 
 
 <script>
+    function plus(id) {
+        var price = parseInt($("#price" + id).text());
+        var qu = parseInt($("#qu" + id).text());
+        var theId = parseInt($("#theID" + id).text());
+        $("#qu" + id).text(qu + 1)
+        qu += 1
+        $('#totatl').text($('#totatl').text() + price)
 
-     var qu = parseInt($("#qu").text());
 
-     function plus() {
-        var theId = parseInt($("#theID").text());
-         $("#qu").text(qu+1)
-         qu+=1
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", `/addproduct/${theId}`, true);
 
+        xhttp.send();
 
-         var xhttp = new XMLHttpRequest();
-         xhttp.open("GET", `/addproduct/${theId}`, true);
+    }
 
-          xhttp.send();
+    function minus(id) {
+        var price = parseInt($("#price" + id).text());
 
-     }
+        var qu = parseInt($("#qu" + id).text());
+        var theId = parseInt($("#theID" + id).text());
 
-     function minus() {
-     var theId = parseInt($("#theID").text());
+        if (qu > 0) {
+            $("#qu" + id).text(qu - 1)
+            qu -= 1
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `/decproCount/${theId}`, false);
+            xhttp.send();
 
-         if(qu>0){
-                $("#qu").text(qu-1)
-                qu-=1
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", `/decproCount/${theId}`, false);
-                xhttp.send();
+            if (qu == 0) {
+                location.reload();
+            }
+            $('#totatl').text($('#totatl').text() - price)
 
-                if(qu==0){location.reload();}
-         }else{
+        } else {
             location.reload();
-         }
-     }
- </script>
+        }
+    }
+</script>
 {% endblock %}

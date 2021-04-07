@@ -1,134 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>HomePage</title>
 
 
     {% load static %}
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/semantic.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/reset.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/site.css' %}">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/container.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/grid.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/header.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/image.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/menu.css' %}">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/divider.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/segment.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/form.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/input.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/button.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/list.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/message.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/icon.css' %}">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="{% static 'polls/semantic/dist/semantic.min.js' %}"></script>
-     <style type="text/css">
-    body {
-      background-color: #ffffff;
-    }
 
-  </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+    <!-- CSS only -->
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <style type="text/css">
+        body {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="ui fixed inverted cblue menu ">
-    <div class="ui container">
-      <a href="#" class="header item">
-    <img class="" src="{% static 'polls/logo3.png' %}">
-        KFUPM HARAJ
-      </a>
-      <a href="#" class="item">Home</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container-fluid">
 
-      <div class="ui simple dropdown item">
-        Dropdown <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="item" href="#">Link Item</a>
-          <a class="item" href="#">Link Item</a>
-          <div class="divider"></div>
-          <div class="header">Header Item</div>
-          <div class="item">
-            <i class="dropdown icon"></i>
-            Sub Menu
-            <div class="menu">
-              <a class="item" href="#">Link Item</a>
-              <a class="item" href="#">Link Item</a>
-            </div>
-          </div>
-          <a class="item" href="#">Link Item</a>
+            <a href="#" class="navbar-brand ">
+                <img style='height:45px' src="{% static 'polls/logo3.png' %}"> KFUPM HARAJ
+            </a>
+            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button >
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <form action="{% url 'polls:search' %}" class="d-flex">
+                        <input name='search' class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            </ul>
+            <span class="nav-item">
+                <a href="{% url 'polls:cart' %}" class="nav-link btn-sm btn-outline-light" link><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                          </svg></a>
+            </span> {% if theuser %}
+
+            <span class="nav-item">
+                <a href="{% url 'polls:addproduct'%}" class="nav-link btn-sm btn-outline-light"><svg id="Capa_1" fill="currentColor"  height="25" viewBox="0 0 512 512" width="25" xmlns="http://www.w3.org/2000/svg"><g><path d="m391.85 306.049h-30v55.101h-55.101v30h55.101v55.101h30v-55.101h55.1v-30h-55.1z"/><path d="m421.625 248.736v-248.736h-421.625v421.625h248.736c18.631 52.596 68.865 90.375 127.764 90.375 74.715 0 135.5-60.785 135.5-135.5 0-58.9-37.779-109.133-90.375-127.764zm-150.625-218.736h120.625v30.251h-120.625zm-90.375 0h60.375v102.458l-30.188-13.361-30.188 13.361v-102.458zm-150.625 0h120.625v30.251h-120.625zm211.849 361.625h-211.849v-301.374h120.625v88.293l60.188-26.639 60.187 26.639v-88.293h120.625v151.598c-4.967-.555-10.012-.849-15.125-.849-74.715 0-135.5 60.785-135.5 135.5 0 5.113.294 10.158.849 15.125zm134.651 90.375c-58.173 0-105.5-47.327-105.5-105.5s47.327-105.5 105.5-105.5 105.5 47.327 105.5 105.5-47.327 105.5-105.5 105.5z"/></g></svg></a>
+            </span>
+            <span class="nav-item">
+                <a href="{% url 'polls:panel' 'OrderTobeShipped' %}" class="nav-link btn-sm btn-outline-light">{{ theuser.username }}</a>
+            </span>
+
+            <span class="nav-item">
+                <a href="{% url 'polls:logout' %}" class="nav-link btn-sm btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                          </svg></a>
+            </span> {% else %}
+
+            <span class="nav-item">
+                <a href="{% url 'polls:login' %}" class="nav-link btn-sm btn-outline-light">Login</a>
+            </span>
+            <span class="nav-item">
+                <a href="{% url 'polls:signup' %}" class="nav-link btn-sm btn-outline-light">Signup</a>
+            </span> {% endif %}
         </div>
-      </div>
-        {% if theuser %}
-        <a href="{% url 'polls:panel' 'OrderTobeShipped' %}" class="item right">{{ theuser.username }}</a>
-                <a href="{% url 'polls:cart' %}" class="item right">Cart</a>
-
-        <a href="{% url 'polls:logout' %}" class="item right">logout</a>
-
-        {% else %}
 
 
-        <a href="{% url 'polls:login' %}" class="item right">Login</a>
-        <a href="{% url 'polls:signup' %}" class="item right">Signup</a>
-        {% endif %}
-
-
-    </div>
-  </div>
+        </div>
+    </nav>
 
 
 
 
 
-<div class="ui clearing segment">
-</div>
 
 
-{% if theuser %}
-    <a class="ui button" href="{% url 'polls:addproduct'%}">add new product</a>
-    {% endif %}
-    <div class="ui stacked segment">
 
-        {% for aproduct in product.all %}
-        <div class="ui card">
-  <div class="image">
-      {% load index %}
+    <div class="container-md">
 
-    <img src="{{ imgs|index:forloop.counter }}">
-  </div>
-  <div class="content">
-    <a class="header">{{ aproduct.product_name }}</a>
-    <div class="meta">
-      <span class="date">Joined in 2013</span>
-    </div>
-    <div class="description">
-     {{ aproduct.product_shortD }}
-    </div>
-  </div>
-  <div class="extra content">
-    <a href="{% url 'polls:product' aproduct.id %}">
-      <i class="user icon"></i>
-      {{ aproduct.product_price }} $
-        <a class="ui button" href="{% url 'polls:addToCart' aproduct.id %}">add to cart</a>
+        <!-- Ad -->
 
-    </a>
-  </div>
-</div>
+        <!--advert-->
+        <!-- <div id="demo" class="carousel slide bg-dark" data-ride="carousel"> -->
+
+        <!-- Indicators -->
+        <!-- <ul class="carousel-indicators"> -->
+        <!-- <li data-target="#demo" data-slide-to="0" class="active"></li> -->
+        <!-- <li data-target="#demo" data-slide-to="1"></li> -->
+        <!-- <li data-target="#demo" data-slide-to="2"></li> -->
+        <!-- </ul> -->
+
+        <!-- The slideshow -->
+        <!-- <div class="carousel-inner"> -->
+        <!-- <div class="carousel-item active justify-content-center"> -->
+        <!-- <p style="text-align:center;"><img src="images/21890.jpg " alt="Los Angeles"></p> -->
+        <!-- </div> -->
+        <!-- <div class="carousel-item justify-content-center"> -->
+        <!-- <p style="text-align:center;"><img src="images/21890.jpg" alt="Chicago"></p> -->
+        <!-- </div> -->
+        <!-- <div class="carousel-item justify-content-center"> -->
+        <!-- <p style="text-align:center;"><img src="images/21890.jpg" alt="New York"></p> -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+        <!-- Left and right controls -->
+        <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev"> -->
+        <!-- <span class="carousel-control-prev-icon"></span> -->
+        <!-- </a> -->
+        <!-- <a class="carousel-control-next" href="#demo" data-slide="next"> -->
+        <!-- <span class="carousel-control-next-icon"></span> -->
+        <!-- </a> -->
+
+        <!-- </div> -->
+        <!-- Add end -->
+
+        {{ captcha }}
+        <div id="container" class="container ">
+            <!-- code -->
+            {% load index %}{{ 0|zeroImgIndx }}{% for product in list %} {% if product %}
+            <div class='row'>
+                <div class='MultiCarousel' data-items='1,3,5,6' data-slide='1' id='MultiCarousel$sellerID' data-interval='1000'>
+                    <p class='alert cblue shadow'>{{ product|getTitle }}</p>
+                    <div class='MultiCarousel-inner'>
+
+                        {% for aproduct in product.all %}
+                        <div class='item'>
+                            <div class="card">
+                                <div class="card-header ">
+                                    <a href="{% url 'polls:product' aproduct.id %}" class="btn link-dark">{{ aproduct.product_name }}</a>
+
+                                </div>
+                                <div class="card-body ">
+                                    <img src="{{ imgs|index }}">
+
+                                    <div class="description">
+                                        {{ aproduct.product_shortD }}
+                                    </div>
+                                </div>
 
 
-{% endfor %}
 
-    </div>
+                                <div class="card-footer ">
+                                    <p>{{ aproduct.product_price }} $</p>
+                                    <a class="btn" href="{% url 'polls:addToCart' aproduct.id %}"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                          </svg></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <button class='btn cblue leftLst '><</button>
+                    <button class='btn cblue rightLst'>></button>
+                </div>
+            </div>
+            {% endif %} {% endfor %}
+
+        </div>
+
 
 
 
 </body>
+
 </html>
