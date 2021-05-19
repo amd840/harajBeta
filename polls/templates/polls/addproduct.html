@@ -19,19 +19,19 @@
                                 </div>
                                 <div class="mb-3">
 
-                                    <input class="form-control form-control-user" type="text" name="product_name" placeholder="product_name" value="{{product.product_name}}">
+                                    <input class="form-control form-control-user" type="text" name="product_name" placeholder="{{ 'Product Name'|translation:lang}}" value="{{product.product_name}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control form-control-user" type="text" name="product_price" placeholder="product_price" value="{{product.product_price}}">
+                                    <input class="form-control form-control-user" type="text" name="product_price" placeholder="{{ 'Product Price'|translation:lang}}" value="{{product.product_price}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="product_qentity" placeholder="product_qentity" value="{{product.product_qentity}}">
+                                    <input class="form-control" type="text" name="product_qentity" placeholder="{{ 'Product Quntity'|translation:lang}}" value="{{product.product_qentity}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="product_shortD" placeholder="product_shortD" value="{{product.product_shortD}}">
+                                    <input class="form-control" type="text" name="product_shortD" placeholder="{{ 'Product Short Description'|translation:lang}}" value="{{product.product_shortD}}">
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control" style="height:100px" type="text" name="product_longD" placeholder="product_longD" value="">{{product.product_longD}}</textarea>
+                                    <textarea class="form-control" style="height:100px" type="text" name="product_longD" placeholder="{{ 'Product Long Description'|translation:lang}}" value="">{{product.product_longD}}</textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -48,30 +48,30 @@
                 {% endfor%}
             </select>
                                 <div class="mb-3">
-                                    <input class="btn cbgreen container" type="submit" name="submit" value="Edit product">
+                                    <input class="btn cyellow container" type="submit" name="submit" value="{{ 'Edit Product'|translation:lang}}">
                                 </div>
                                 <div class="mb-3">
-                                    <a href="{% url 'polls:deleteProduct' product.id  %}" class="btn btn-danger container">Delete</a>
+                                    <a href="{% url 'polls:deleteProduct' product.id  %}" class="btn btn-danger container">{{ 'Delete'|translation:lang}}</a>
                                 </div>
                                 {% else%}
                                 <div class="mb-3">
 
-                                    <input class="form-control" type="text" name="product_name" placeholder="product_name" value="{{product}}">
+                                    <input class="form-control" type="text" name="product_name" placeholder="{{ 'Product Name'|translation:lang}}" value="{{product}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="product_price" placeholder="product_price">
+                                    <input class="form-control" type="text" name="product_price" placeholder="{{ 'Product Price'|translation:lang}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="product_qentity" placeholder="product_qentity">
+                                    <input class="form-control" type="text" name="product_qentity" placeholder="{{ 'Product Quntity'|translation:lang}}">
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control" type="text" name="product_shortD" placeholder="product_shortD"></textarea>
+                                    <input class="form-control" type="text" name="product_shortD" placeholder="{{ 'Product Short Description'|translation:lang}}">
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" style="height:100px" type="text" name="product_longD" placeholder="product_longD">
+                                    <textarea class="form-control"  type="text" name="product_longD" placeholder="{{ 'Product Long Description'|translation:lang}}"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" id="id_image" type="file" class="" name="image">
+                                    <input class="form-control" id="id_image" type="file" class="" name="image" title="ttt">
                                 </div>
                                 <div class="mb-3">
                                     <select class="form-control" name="sort" id="sort">
@@ -88,7 +88,8 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <input class="btn cbgreen container" type="submit" name="submit" value="Add product">
+                                    
+                                    <input class="btn cyellow container" type="submit" name="submit" value="{{ 'Add Product'|translation:lang}}">
                                 </div>
 
 

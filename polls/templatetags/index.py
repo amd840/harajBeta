@@ -1,11 +1,12 @@
 from django import template
 from polls.models import Cart, User, Product, Order, Sort, SubSort
+from django.http import HttpResponse, HttpResponseForbidden , HttpResponseRedirect
 
 register = template.Library()
 
 
 totalPrice = 0.0
-
+lang = 'ar'
 imgCounter = 0
 @register.filter
 def index(indexable):
@@ -129,6 +130,63 @@ def cartCount(carts):
     except:
         return len(carts)
     return str(count)
+
+
+
+@register.filter
+def translation(key,lang0):
+    dictionary =  {'Complete the order':'اكمل الطلب'
+    ,'Panal':'الاعدادات'
+    ,'Products Management':'ادارة المنتجات'
+    ,'Orders to be shipped':''
+    ,'Edit Product':'تعديل المنتج'
+    ,'Shopping Cart':''
+    ,'Total':'المجموع'
+    ,'Electronic':''
+    ,'Book':''
+    ,'Search':'بحث'
+    ,'Login':'تسجيل الدخول'
+    ,'Sign Up':'التسجيل'
+    ,'First Name':'الاسم الاول'
+    ,'Last Name':'الاسم الأخير'
+    ,'User name':'اسم المستخدم'
+    ,'Password':'الرقم السري'
+    ,'Email':'البريد الاكتروني'
+    ,'Mobile Phone':'رقم الجوال'
+    ,'Address':'العنوان'
+    ,'Address: 816 - 224':'816-224:العنوان'
+
+    ,'Product Name':'اسم المنتج'
+    ,'Product Price':'سعر المنتج'
+    ,'Product Quntity':'الكمية'
+    ,'Product Short Description':'الوصف المختصر للمنتج'
+    ,'Product Long Description':'الوصف المطول للمنتج'
+    ,'Add Product':'أضف المنتج'
+    ,'Add to Cart':'أضف إلى العربة'
+    ,'Delete':'حذف'
+    ,'Buy':'شراء'
+
+    
+    }
+    if(lang == 'ar'):
+        return dictionary[key]
+    return key
+
+@register.filter
+def dir(lang0):
+    if (lang =='ar'):
+        return 'rtl'
+    return 'ltr'
+
+@register.filter
+def setLang(request):
+    global lang
+    if(lang=='ar'):
+        lang = 'en'
+    else:
+        lang = 'ar'
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponse("<script>history.go(-1);location.href;</script>")
 
 
 

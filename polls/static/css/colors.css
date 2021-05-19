@@ -27,6 +27,14 @@
     color: #FFF;
 }
 
+.cpurple {
+    background: #4a4a5a;
+    color:#FFF;
+}
+.cpurple-text {
+    color: #4a4a5a;
+}
+
 .cblue-text {
     color: #264E70;
 }
@@ -38,9 +46,18 @@
 .cpink {
     background: #F9B4AB
 }
+.btn.cyellow:hover {
+    background: #ffd145;
+}
 
 .cyellow {
-    background: #FDEBD3;
+    /* background: #FDEBD3; */
+    background: #FFC30C;
+}
+.cdyellow {
+    /* background: #FDEBD3; */
+    background: #b27908;
+    color: #FFF;
 }
 
 .clgreen {

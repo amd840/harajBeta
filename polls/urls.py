@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.urls import path
 
 from . import views
+from .templatetags import index
 
 app_name = 'polls'
 
@@ -32,6 +33,8 @@ urlpatterns = [
     #path('upload_pic/', views.upload_pic, name="upload_pic"),
     path('panel/<str:orderid>/', views.panel, name="panel"),
     path('order/', views.order, name="order"),
+    path('lang/', index.setLang, name="lang"),
+
     path('orderCompletion/<int:orderid>/', views.orderCompletion, name="orderCompletion"),
 
 

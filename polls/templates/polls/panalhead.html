@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
 {% load static %} {% load index %}
+
+
+<html  lang="ar">
+   
 
 <head>
     <meta charset="UTF-8">
@@ -46,7 +49,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
                 <div class="container-fluid">
                     <button class="btn btn-dark" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
-                    <a href="{% url 'polls:index'%}" class="navbar-brand"> <img style='height:45px' src="{% static 'polls/logo3.png' %}"> KFUPM HARAJ</a>
+                    <a href="{% url 'polls:index'%}" class="navbar-brand"> <img style='height:45px' src="{% static 'polls/cmarket.svg' %}"> CAMPUS MARKET</a>
                     <div class="row me-0 mb-0 mb-lg-0">
                         <span class="col nav-item">
                         <a href="{% url 'polls:cart' %}" class="nav-link btn-sm btn-outline-light"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">

@@ -1,5 +1,5 @@
  {% extends 'head.html' %} {% block content %} {% load index %} {{ 0|emptyTotal }}
-<section id='items'>
+<section class="section" id='items'>
     <h2 style="display: inline">Shopping Cart </h2>
     <h3 id='counter' style="display: inline"> {{carts|cartCount}}</h3>
     {% for cart in carts %}
@@ -53,15 +53,15 @@
 
 
 </section>
-<aside>
+<aside class="aside">
     <div class="card text-secondary">
         <div class="card-body">
-            <p>Total:</p>
+            <p>{{ 'Total'|translation:lang }}:</p>
             <a id='totatl'>{{ 5|printTotal }}</a>
         </div>
         <div class="card-footer">
 
-            <a href="{% url 'polls:makeOrder' %}" id="buy" class="cblue btn">buy</a>
+            <a href="{% url 'polls:makeOrder' %}" id="buy" class="cblue btn">{{ 'Buy'|translation:lang}}</a>
         </div>
 
     </div>

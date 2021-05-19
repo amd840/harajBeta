@@ -1,4 +1,5 @@
 {% extends 'head.html' %} {% block content %} {% load index %}{% load static %}
+{{ 0|zeroImgIndx }}
 <div class="container">
     {% for product in products %}
     <div class="row">
@@ -6,11 +7,11 @@
             <div class="card-header">
                 <a href="{% url 'polls:product' product.id %}">{{product.product_name}}</a>
             </div>
-            <div class="card-body"><img src='{{ product.product_img }}' />
+            <div class="card-body"><img src='{{ imgs|index }}' />
                 <p>{{ product.product_shortD }}</p>
             </div>
             <div class="card-footer">
-                <p>{{product.product_price}}</p><a class="btn btn-dark" href="{% url 'polls:addToCart' product.id %}">add to cart</a></div>
+                <p>{{product.product_price}}</p><a class="btn btn-dark" href="{% url 'polls:addToCart' product.id %}">{{ 'Add to Cart'|translation:lang}}</a></div>
         </div>
     </div>
     {% endfor %}

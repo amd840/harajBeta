@@ -18,7 +18,7 @@
     <div class="row">
         <div class='col-4'></div>
         <div class='col-6 card-footer offset-md-0'>
-            <a class="btn cbgreen " href="{% url 'polls:addToCart' product.id %}">add to cart</a>
+            <a class="btn cbgreen " href="{% url 'polls:addToCart' product.id %}">{{ 'Add to Cart'|translation:lang}}</a>
             <lable>{{product.product_price}} $</lable>
         </div>
     </div>

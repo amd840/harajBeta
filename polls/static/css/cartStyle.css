@@ -1,9 +1,9 @@
-section {
+section.section {
     width: 50%;
     display: inline-block;
     margin: 20px 5vw;
 }
-aside {
+aside.aside {
     width: 35%;
     display: inline-block;
 
@@ -15,12 +15,12 @@ aside {
         width: 96%;
         margin: 2%;
     }
-    section {
+    section.section {
         width: 90%;
         display: block;
         margin: 20px 10px;
     }
-    aside {
+    aside.aside {
         width: 85%;
         display: block;
         margin: 20px 10px;

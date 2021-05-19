@@ -21,8 +21,9 @@ from django.contrib.sessions.base_session import AbstractBaseSession
 # import os
 # from pathlib import Path
 
+lang = 'ar'
 def index(request):
-    products = Product.objects.order_by('id')
+    products = Product.objects.filter(product_qentity__gte=1).order_by('id')
     # captcha = ImageCaptcha()
     # captcha = AudioCaptcha()
     # path = os.path.join(os.path.dirname(__file__), 'static/out.wav')
@@ -31,7 +32,7 @@ def index(request):
     sortList=[]
     sorts = Sort.objects.order_by('id')
     for st in sorts:
-        proList = Product.objects.filter(sort=st)
+        proList = Product.objects.filter(sort=st,product_qentity__gte=1)
         sortList.append(proList)
     # return HttpResponse(json.dumps(sortList))
     
@@ -40,9 +41,9 @@ def index(request):
     # return HttpResponse(imagelist)
     if (request.session.get('theuser')):
         euser = User.objects.get(username=request.session.get('theuser'))
-        return render(request, 'polls/index.html', {'list': sortList, 'theuser': euser, "imgs": imagelist,})
+        return render(request, 'polls/index.html', {'list': sortList, 'theuser': euser, "imgs": imagelist,'lang':lang})
 
-    return render(request, 'polls/index.html', {'list': sortList, "imgs": imagelist})
+    return render(request, 'polls/index.html', {'list': sortList, "imgs": imagelist,'lang':lang})
 
     return HttpResponse("Home Page")
 
@@ -50,7 +51,7 @@ def index(request):
 def search(request):
     # return HttpResponse(request.GET)
     if(request.GET.get("search")):
-        products = Product.objects.filter(product_name__contains=request.GET.get("search"))
+        products = Product.objects.filter(product_qentity__gte=1,product_name__contains=request.GET.get("search"))
     else:
         return HttpResponseRedirect('/')  
     imagelist = [] 
@@ -59,9 +60,9 @@ def search(request):
     # return HttpResponse(imagelist)
     if (request.session.get('theuser')):
         euser = User.objects.get(username=request.session.get('theuser'))
-        return render(request, 'polls/search.html', {'products': products, 'theuser': euser, "imgs": imagelist})
+        return render(request, 'polls/search.html', {'products': products, 'theuser': euser, "imgs": imagelist,'lang':lang})
 
-    return render(request, 'polls/search.html', {'products': products, "imgs": imagelist})
+    return render(request, 'polls/search.html', {'products': products, "imgs": imagelist,'lang':lang})
 
     return HttpResponse("Home Page")
 
@@ -84,7 +85,7 @@ def signup(request):
         # return index(request)
 
     else:
-        return render(request, 'polls/signup.html')
+        return render(request, 'polls/signup.html',{'lang':lang})
 
 
 def signups(request):
@@ -92,7 +93,7 @@ def signups(request):
 
     user.save()
 
-    return render(request, 'polls/signups.html', {'user': user})
+    return render(request, 'polls/signups.html', {'user': user,'lang':lang})
 
 
 def login(request):
@@ -111,7 +112,7 @@ def login(request):
         else:
             return HttpResponse("wrong password")
     else:
-        return render(request, 'polls/login.html')
+        return render(request, 'polls/login.html' ,{'lang':lang})
 
 
 def addCartToUser(request,user):
@@ -125,8 +126,10 @@ def addCartToUser(request,user):
 
 def product(request,productid):
     product = Product.objects.get(pk=productid)
-
-    return render(request, 'polls/product.html',{'product':product})
+    if(request.session.get('theuser')):
+            euser = User.objects.get(username=request.session.get('theuser'))
+            return render(request, 'polls/product.html',{'product':product,'theuser': euser,'lang':lang})
+    return render(request, 'polls/product.html',{'product':product,'lang':lang})
 
 
 def addproduct(request):
@@ -158,7 +161,7 @@ def addproduct(request):
 
             # return index(request)
 
-    return render(request, 'polls/addproduct.html',{'sorts':sorts,'subsorts':subsorts})
+    return render(request, 'polls/addproduct.html',{'sorts':sorts,'subsorts':subsorts,'lang':lang,'theuser':seller})
 
 def decPro(request, productid):
     product = Product.objects.get(pk=productid)
@@ -352,7 +355,7 @@ def cart(request):
     if (request.session.get('theuser')):
         user = User.objects.get(username=request.session['theuser'])
         carts = Cart.objects.filter(buyer=user.username,state=1)
-        return render(request, 'polls/cart.html', {'carts': carts, 'user': user,'theuser':user})
+        return render(request, 'polls/cart.html', {'carts': carts, 'user': user,'theuser':user,'lang':lang})
 
     if (request.session.get('cart')):
 
@@ -367,8 +370,8 @@ def cart(request):
 
         # return HttpResponse(cartlist)
 
-        return render(request, 'polls/cart.html', {'carts': cartlist})
-    return render(request, 'polls/cart.html')
+        return render(request, 'polls/cart.html', {'carts': cartlist,'lang':lang})
+    return render(request, 'polls/cart.html',{'lang':lang})
 
 
 def makeOrder(request):
@@ -414,8 +417,8 @@ class ImageUploadForm(forms.Form):
 def panel(request,orderid):
     if (request.session.get('theuser')):
         euser = User.objects.get(username=request.session.get('theuser'))
-        order = Order.objects.filter(seller=euser.username)
-    return render(request, 'polls/panal.html',{'username':euser,'orders':order,'page':orderid})
+        order = Order.objects.filter(seller=euser.username,state=1)
+    return render(request, 'polls/panal.html',{'username':euser,'orders':order,'page':orderid,'lang':lang})
 
 
 def order(request):
@@ -423,18 +426,19 @@ def order(request):
         euser = User.objects.get(username=request.session.get('theuser'))
         orders = Order.objects.filter(seller=euser.username)
 
-    return render(request, 'polls/order.html',{'username':euser,'orders':orders})
+    return render(request, 'polls/order.html',{'username':euser,'orders':orders,'lang':lang})
 
 
 def orderCompletion(request,orderid):
     if (request.session.get('theuser')):
-        euser = User.objects.get(username=request.session.get('theuser'))
+        ooder = Order.objects.get(pk=orderid)
+        # euser = User.objects.get(username=request.session.get('theuser'))
 
-        order = euser.order_set.get(pk=orderid)
-        order.state = 2
-        order.save()
+        # order = euser.order_set.get(pk=orderid)
+        ooder.state = 2
+        ooder.save()
 
-        return HttpResponseRedirect('/order')
+        return HttpResponseRedirect('/panel/OrderTobeShipped')
 
 
 def editProduct(request,productid):
@@ -444,7 +448,7 @@ def editProduct(request,productid):
     subsorts = SubSort.objects.all()
 
     if(product.product_seller == euser):
-        return render(request, 'polls/addproduct.html',{'product':product, 'sorts':sorts,'subsorts':subsorts})
+        return render(request, 'polls/addproduct.html',{'product':product, 'sorts':sorts,'subsorts':subsorts,'lang':lang,'theuser':euser})
     else:
         return HttpResponseRedirect('/')
         return index(request)

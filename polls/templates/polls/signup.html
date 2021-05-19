@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load index %}
 
+<html dir="{{ lang|dir }}" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>signup</title>
     {% load static %}
+    {% load index %}
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -17,7 +19,8 @@
 
     <style type="text/css">
         body {
-            background-color: #BBD4CE;
+            /* background-color: #BBD4CE; */
+            background-color: #4a4a5a;
         }
         
         body>.grid {
@@ -42,9 +45,9 @@
     <div class="container d-flex justify-content-center my-5">
         <div class="row ">
             <span class="text-center">
-                <img src="{% static 'polls/logo.svg' %}">
-                <h2 class="cblue-text d-inline-block" style="text-align: center;">
-                    Sign up
+                <a href="{% url 'polls:index'%}"><img style='height: 50px;' src="{% static 'polls/cmarket.svg' %}"></a>
+                <h2 class="text-light d-inline-block" style="text-align: center;">
+                    {{ 'Sign Up'|translation:lang}}
                 </h2>
             </span>
 
@@ -60,50 +63,49 @@
 
 
                     <div class="mb-3">
-                        <input class="form-control" type="text" name="firstname" placeholder="First Name">
+                        <input class="form-control" type="text" name="firstname" placeholder="{{ 'First Name'|translation:lang}}">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="text" name="lastname" placeholder="Last Name">
+                        <input class="form-control" type="text" name="lastname" placeholder="{{ 'Last Name'|translation:lang}}">
                     </div>
                     <div class="mb-3">
 
-                        <input class="form-control" type="text" name="username" placeholder="User Name">
+                        <input class="form-control" type="text" name="username" placeholder="{{ 'User name'|translation:lang}}">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="password" name="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" placeholder="{{ 'Password'|translation:lang}}">
 
                     </div>
 
                     <div class="mb-3">
-                        <input class="form-control" type="text" name="email" placeholder="Email">
+                        <input class="form-control" type="text" name="email" placeholder="{{ 'Email'|translation:lang}}">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="text" name="phone" placeholder="Mobile Phone">
+                        <input class="form-control" type="text" name="phone" placeholder="{{ 'Mobile Phone'|translation:lang}}">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="text" name="address" placeholder="Address: 816 - 224">
+                        <input class="form-control" type="text" name="address" placeholder="{{ 'Address: 816 - 224'|translation:lang}}">
                     </div>
 
 
 
                     <div class="mb-3">
 
-                        <input class="btn cbgreen container bold" type="submit" name="submit" value="Signup">
+                        <input class="btn cyellow container bold" type="submit" name="submit" value="{{ 'Sign Up'|translation:lang}}">
 
                     </div>
-                    <div class="mb-3">
-                        <a class="btn cbgreen container bold " href="{% url 'polls:login' %}">login</a>
-
-                    </div>
+                   
 
                 </div>
 
             </form>
+            
+
+                <a  class="card btn bold" href="{% url 'polls:login' %}">{{ 'Login'|translation:lang}}</a>
         </div>
     </div>
     </div>
 </body>
 
-</body>
 
 </html>

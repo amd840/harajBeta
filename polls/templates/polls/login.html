@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+{% load index %}
+
+<html dir="{{ lang|dir }}" lang="ar">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
@@ -8,28 +10,16 @@
 
 
 {% load static %}
+{% load index %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
 
 
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/reset.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/site.css' %}">
-
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/container.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/grid.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/header.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/image.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/menu.css' %}">
-
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/divider.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/segment.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/form.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/input.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/button.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/list.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/message.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'polls/semantic/dist/components/icon.css' %}">
-    <style type="text/css">
+<style type="text/css">
     body {
-      background-color: #BBD4CE;
+      background-color: #4a4a5a;
     }
     body > .grid {
       height: 100%;
@@ -46,39 +36,41 @@
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="{% static 'polls/semantic/dist/semantic.min.js' %}"></script>
-</head><body>
-
-<div class="ui middle aligned center aligned grid" >
-        <div class="column" style="margin 200px">
-            <h2 class="ui cblue image header">
-                <img class="image" src="{% static 'polls/logo3.png' %}">
-                <div class="content ">
-                    Sign up
-                </div>
-
+</head>
+<body>
+  
+  <div class="container d-flex justify-content-center my-5">
+    <div class="row ">
+        <span class="text-center">
+                <a href="{% url 'polls:index'%}"><img height="50px" src="{% static 'polls/cmarket.svg' %}"></a>
+          <h2 class="text-light d-inline-block" style="text-align: center;">
+                {{ 'Login'|translation:lang}}
             </h2>
-<form  class="ui large form" action="{% url 'polls:login' %}" method="post">
+        </span>
+
+
+
+
+            
+<form  class="card shadow-lg o-hidden border-0 my-4" action="{% url 'polls:login' %}" method="post">
 {% csrf_token %}
 
 
-    <div class="ui stacked segment">
-        <div class="field">
-            <input type="text" name="username">
+<div class="card-body p-2">
+        <div class="mb-3">
+            <input class="form-control" type="text" name="username" placeholder="{{ 'User name'|translation:lang}}">
         </div>
-        <div class="field">
-            <input type="password" name="password">
+        <div class="mb-3">
+            <input class="form-control" type="password" name="password" placeholder="{{ 'Password'|translation:lang}}">
         </div>
-        <div class="field">
-            <input class="ui button fluid submit cbgreen" type="submit" name="submit" value="login">
+        <div class="mb-3">
+            <input class="btn cyellow container bold" type="submit" name="submit" value="{{ 'Login'|translation:lang}}">
         </div>
     </div>
 </form>
-                <div class="ui message">
-
-            <a  style="color:black"class="" href="{% url 'polls:signup' %}">Signup</a>
-                </div>
-
-                </div>
+<br/>
+<a  class="card btn bold" href="{% url 'polls:signup' %}">{{ 'Sign Up'|translation:lang}}</a>
+</div>
     </div>
 
 
