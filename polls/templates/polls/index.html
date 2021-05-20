@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <title>HomePage</title>
+    <title>CAMPUS HARAJ</title>
 
 
     {% load static %}
@@ -56,7 +56,7 @@
         <div class="container-fluid">
 
             <a href="#" class="navbar-brand ">
-                <img style='height:45px' src="{% static 'polls/cmarket.svg' %}"> CAMPUS MARKET
+                <img style='height:45px' src="{% static 'polls/cmarket.svg' %}"> CAMPUS HARAJ
             </a>
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -161,7 +161,7 @@
             {% load index %}{{ 0|zeroImgIndx }}{% for product in list %} {% if product %}
             <div class='row'>
                 <div class='MultiCarousel' data-items='1,3,5,6' data-slide='1' id='MultiCarousel$sellerID' data-interval='1000'>
-                    <p class='alert cblue shadow'>{{ product|getTitle }}</p>
+                    <p class='alert cpurple shadow'>{{ product|getTitle }}</p>
                     <div class='MultiCarousel-inner'>
 
                         {% for aproduct in product.all %}
@@ -172,7 +172,7 @@
 
                                 </div>
                                 <div class="card-body ">
-                                    <img src="{{ imgs|index }}">
+                                    <img style="max-width: 100%;" src="{{ imgs|index }}">
 
                                     <div class="description">
                                         {{ aproduct.product_shortD }}
@@ -194,8 +194,12 @@
                         {% endfor %}
 
                     </div>
-                    <button class='btn cblue leftLst '><</button>
-                    <button class='btn cblue rightLst'>></button>
+                    <button class='btn cpurple leftLst '> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                        <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+                      </svg></button>
+                    <button class='btn cpurple rightLst'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                        <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+                      </svg> </button>
                 </div>
             </div>
             {% endif %} {% endfor %}
@@ -245,7 +249,7 @@
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">
-              CAMPUS MARKET
+              CAMPUS HARAJ
             </h6>
             <p>
               <a class="text-reset" href="https://ahmedalmoairfi.sa">Contact The Developer</a>
@@ -268,7 +272,7 @@
             <p><i class="fas fa-home me-3"></i> SAUDI ARABIA, DHAHRAN</p>
             <p>
               <i class="fas fa-envelope me-3"></i>
-              support@CAMPUSMARKET.com
+              support@CAMPUSHARAJ.com
             </p>
            
           </div>
@@ -282,7 +286,7 @@
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
       © 2021
-      <a class="text-reset fw-bold" href="https://CAMPUSMARKET.com/">CAMPUSMARKET.com</a>
+      <a class="text-reset fw-bold" href="https://CAMPUSHARAJ.com/">CAMPUSHARAJ.com</a>
     </div>
     <!-- Copyright -->
   </footer>

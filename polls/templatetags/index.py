@@ -151,6 +151,9 @@ def translation(key,lang0):
     ,'Last Name':'الاسم الأخير'
     ,'User name':'اسم المستخدم'
     ,'Password':'الرقم السري'
+    ,'Repeat Password':'تأكيد الرقم السري'
+    ,'Reset Password':'تغيير الرقم السري'
+
     ,'Email':'البريد الاكتروني'
     ,'Mobile Phone':'رقم الجوال'
     ,'Address':'العنوان'
@@ -187,6 +190,10 @@ def setLang(request):
         lang = 'ar'
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # return HttpResponse("<script>history.go(-1);location.href;</script>")
+
+@register.filter
+def isAr(request):
+    return lang=='ar'
 
 
 

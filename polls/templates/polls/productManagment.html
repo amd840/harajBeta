@@ -12,11 +12,11 @@
 
 
                 <div class="card-body">
-                    <img class="card-img-top card-img-top" style="height:200px; width:auto" src="{{ item.product_img.name|getImgUrl }}">
+                    <img class="card-img-top card-img-top" style="height:200px; width:auto;max-width: 100%;" src="{{ item.product_img.name|getImgUrl }}">
 
                     <h6 class="">{{ item.product_shortD }}</h6>
                     <h6 class="inline-block"><i class="user icon"></i>{{ item.product_price }}$</h6>
-                    <a class="btn cblue" href="{% url 'polls:editProduct' item.id %}">editproduct</a>
+                    <a class="btn cpurple" href="{% url 'polls:editProduct' item.id %}">editproduct</a>
 
 
 

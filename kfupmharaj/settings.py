@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'k4h+a&5y51=^jo2awa0bn$-r2snhj^1b#a0clzkas-4)f)fv%!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['herokudjangoapp.herokuapp.com','testharaj.herokuapp.com','db3a30a4f74c.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['herokudjangoapp.herokuapp.com','testharaj.herokuapp.com','db3a30a4f74c.ngrok.io', 'localhost', '127.0.0.1','192.168.1.13']
 
 
 # Application definition
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,6 +129,18 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST = 'smtp.hostinger.com'
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+# EMAIL_PORT = 465 
+# EMAIL_HOST_USER = 'me@amd840.com'
+EMAIL_HOST_USER = 'mserves5@gmail.com'
+
+# EMAIL_HOST_PASSWORD = 'Asd123123'
+EMAIL_HOST_PASSWORD = 'mail$123'
 
 # STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
@@ -137,4 +149,4 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

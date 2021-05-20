@@ -12,7 +12,7 @@
                     <h4 class="card-title">{{ order|getCartPro:'name' }}</h5>
                 </div>
                 <div class="card-body">
-                    <img class="card-img-top" style="height:200px; width:auto" src="{{ order|getorder:'img' }}">
+                    <img class="card-img-top" style="height:200px; width:auto;max-width: 100%;" src="{{ order|getorder:'img' }}">
 
                     <h6 class="">{{ order|getorder:'short' }}</h6>
                     <h6 class="">{{ order|getorder:'buyer' }}</h6>
@@ -28,7 +28,7 @@
                         {{ order|getorder:'price' }} $ 
                     </a>
                     <div>
-                        <a class="btn cblue" href="{% url 'polls:orderCompletion' order.id %}">Complete the order</a>
+                        <a class="btn cpurple" href="{% url 'polls:orderCompletion' order.id %}">Complete the order</a>
                     </div>
                 </div>
             </div>

@@ -7,10 +7,12 @@ import json
 from collections import namedtuple
 # from captcha.image import ImageCaptcha
 # from captcha.audio import AudioCaptcha
+import random
+import hashlib
 
 # Create your views here.
 from django.http import HttpRequest, HttpResponseForbidden
-
+from django.core.mail import send_mail,BadHeaderError
 from django.http import HttpResponse, HttpRequest,HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -21,7 +23,10 @@ from django.contrib.sessions.base_session import AbstractBaseSession
 # import os
 # from pathlib import Path
 
+from django.core.mail import EmailMultiAlternatives
 lang = 'ar'
+text = "0"
+resetPassword = {'email':'auth'}
 def index(request):
     products = Product.objects.filter(product_qentity__gte=1).order_by('id')
     # captcha = ImageCaptcha()
@@ -98,7 +103,10 @@ def signups(request):
 
 def login(request):
     if (request.POST):
-        user = get_object_or_404(User, username=request.POST['username'])
+        try:
+            user = User.objects.get(username=request.POST['username'])
+        except:
+            return render(request, 'polls/login.html' ,{'lang':lang,'err':'username of password is not correct'})        
         if (user.password == request.POST['password']):
             request.session['seller'] = user.username
             request.session['theuser'] = user.username
@@ -110,7 +118,8 @@ def login(request):
             return HttpResponseRedirect('/')
             return index(request)
         else:
-            return HttpResponse("wrong password")
+
+            return render(request, 'polls/login.html' ,{'lang':lang,'err':'username of password is not correct'})
     else:
         return render(request, 'polls/login.html' ,{'lang':lang})
 
@@ -485,7 +494,71 @@ def deleteProduct(request,productid):
         product.delete()
     return HttpResponseRedirect('/')
 
+def email(request):
+    
+    global resetPassword
+    if(request.POST.get('key')):
+        authCode = request.POST['key']
+        email = request.POST['email']
+        if(resetPassword.get(email)):
+            if(resetPassword.get(email) == authCode):
+                user = User.objects.get(email=email)
+                user.password = request.POST['password']
+                user.save()
+                return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/resetPassword')
 
+    if(request.POST.get('email')):
+        email = request.POST['email']
+        code = str(random.randint(1000000000000,10000000000000)).encode()
+
+
+        hashP = hashlib.sha256(code)
+        # return HttpResponse(code)
+
+        codeValue = hashP.hexdigest()
+        resetPassword[email] = codeValue
+        subject, from_email, to = 'hello', 'mserves5@gmail.com', email
+        text_content = 'http://testharaj.herokuapp.com/resetPassword?key='+codeValue+'&email='+email
+        html_content = '<p>This is an <strong>important</strong> message.</p><a href="'+text_content+'">reset</a>'
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        try:
+            msg.send()
+        except:
+            return HttpResponseRedirect('/resetPassword')
+
+        return HttpResponseRedirect('/')
+    if(request.GET):
+        authCode = request.GET['key']
+        email = request.GET['email']
+        if(resetPassword.get(email)):
+            if(resetPassword.get(email) == authCode):
+                return render(request, 'polls/resetPassword.html',{'lang':lang,'email':email,'authCode':authCode})
+
+        
+
+    # subject, from_email, to = 'hello', 'me@amd840.com', 'ahmedalmoairfi@gmail.com'
+    # text_content = 'This is an important message.'
+    # html_content = '<p>This is an <strong>important</strong> message.</p>'
+    # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    # msg.attach_alternative(html_content, "text/html")
+    # #msg.send()
+    return render(request, 'polls/resetPassword.html',{'lang':lang})
+   
+    try:
+        send_mail(
+        'Subject here1',
+        'Here is the message.1',
+        'me@amd840.com',
+        ['ahmedalmoairfi@gmail.com'],
+       
+        )
+        # return HttpResponse("00010")
+    except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+    
+    return HttpResponseRedirect('/')
 
 
 

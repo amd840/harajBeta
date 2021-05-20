@@ -27,6 +27,10 @@
     color: #FFF;
 }
 
+.cpurple:hover {
+    background: #6b6b83;
+    color:#FFF;
+}
 .cpurple {
     background: #4a4a5a;
     color:#FFF;
@@ -69,6 +73,7 @@
 }
 
 a.list-group-item.active {
-    background-color: #264E70;
+    background-color: #4a4a5a;
     color: #FFF;
+    border: none;
 }

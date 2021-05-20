@@ -45,6 +45,8 @@ urlpatterns = [
     path('saveEditP/<int:productid>/', views.saveEditP, name="saveEditP"),
 
     path('logout/', views.logout, name="logout"),
+    path('resetPassword/', views.email, name="resetPassword"),
+
     path('cart/', views.cart, name="cart"),
     path('delcart/<int:cartId>', views.delCart, name="delCart"),
     path('makeOrder/', views.makeOrder, name="makeOrder"),
